@@ -92,7 +92,7 @@
 		self.badgeColorHasMail = [NSColor blackColor];
 		self.badgeColorNoMail = [[NSColor blackColor] colorWithAlphaComponent:0.3];
 		
-		[self updateBadgeWithCount:0];
+		[self mailboxDisplayCountDidChange];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mailboxDisplayCountDidChange) name:@"MailboxDisplayCountDidChange" object:nil];
 	}
