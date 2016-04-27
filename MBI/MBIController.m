@@ -145,11 +145,15 @@
 	// text size
 	NSString *text = [NSString stringWithFormat:@"%llu", (unsigned long long)count];
 	CGRect textRect = [text boundingRectWithSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX) options:options attributes:self.textAttributes context:nil];
-	CGFloat minWidth = ceil(1 + textRect.size.width / self.zeroWidth) * self.zeroWidth;
+	CGFloat width = (floor(textRect.size.width / self.zeroWidth) + 2) * self.zeroWidth + 4;
+	
+	if ((int)width % 2 != 0) {
+		width -= 1;
+	}
 	
 	// badge and text rects
-	CGRect badgeRect = CGRectMake(0, 0, ceil(MAX(textRect.size.width, minWidth)) + 6, ceil(textRect.size.height) + 2);
-	textRect = CGRectMake(ceil((badgeRect.size.width - textRect.size.width) / 2), ceil((badgeRect.size.height - textRect.size.height) / 2), textRect.size.width, textRect.size.height);
+	CGRect badgeRect = CGRectMake(0, 0, width, floor(textRect.size.height));
+	textRect = CGRectMake((badgeRect.size.width - textRect.size.width) / 2, (badgeRect.size.height - textRect.size.height) / 2, textRect.size.width, textRect.size.height);
 	
 	
 	// image mask
