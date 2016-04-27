@@ -61,7 +61,6 @@
 	static dispatch_once_t onceToken;
 	static MBIController *instance;
 	dispatch_once(&onceToken, ^{
-		NSLog(@"MBIController sharedInstance");
 		instance = [[MBIController alloc] init];
 	});
 	
@@ -254,7 +253,13 @@
 // -----------------------------------------------------------------------------
 - (void)statusItemPressed
 {
-	[[NSApplication sharedApplication] activateIgnoringOtherApps:YES];
+	NSApplication *application = [NSApplication sharedApplication];
+	
+	if (application.active) {
+		[application hide:self];
+	} else {
+		[application activateIgnoringOtherApps:YES];
+	}
 }
 
 @end

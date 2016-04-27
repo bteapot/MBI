@@ -2,11 +2,15 @@
 
 Menu bar unread count for Mail.app in Mac OS.
 
-## Usage
+### Usage
+
+Enable Mail.app bundles:
+
+	defaults write com.apple.mail EnableBundles -bool YES
 
 Build project. This will place `MBI.mailbundle` into `~/Library/Mail/Bundles`. Restart Mail.app.
 
-## Compatibility
+### Compatibility
 
 For compatibility with future versions of Mail.app, use:
 
