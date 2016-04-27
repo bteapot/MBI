@@ -1,0 +1,291 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9273CB961CCF6F0200E55850 /* MBIController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9273CB951CCF6F0200E55850 /* MBIController.m */; };
+		9273CBAB1CCF869800E55850 /* MBI.mailbundle in Install Bundle */ = {isa = PBXBuildFile; fileRef = 9273CB8B1CCF6EA600E55850 /* MBI.mailbundle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9273CBAA1CCF868400E55850 /* Install Bundle */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "~/Library/Mail/Bundles";
+			dstSubfolderSpec = 0;
+			files = (
+				9273CBAB1CCF869800E55850 /* MBI.mailbundle in Install Bundle */,
+			);
+			name = "Install Bundle";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		9273CB8B1CCF6EA600E55850 /* MBI.mailbundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MBI.mailbundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		9273CB8E1CCF6EA600E55850 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9273CB941CCF6F0200E55850 /* MBIController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBIController.h; sourceTree = "<group>"; };
+		9273CB951CCF6F0200E55850 /* MBIController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBIController.m; sourceTree = "<group>"; };
+		927A1B6B1CD0EE32000B6DCD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		92CF5E151CCFA4EA007C7C2F /* MVMailBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MVMailBundle.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9273CB881CCF6EA600E55850 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9273CB821CCF6EA600E55850 = {
+			isa = PBXGroup;
+			children = (
+				9273CB8D1CCF6EA600E55850 /* MBI */,
+				9273CB8C1CCF6EA600E55850 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9273CB8C1CCF6EA600E55850 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9273CB8B1CCF6EA600E55850 /* MBI.mailbundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9273CB8D1CCF6EA600E55850 /* MBI */ = {
+			isa = PBXGroup;
+			children = (
+				927A1B6B1CD0EE32000B6DCD /* README.md */,
+				9273CB8E1CCF6EA600E55850 /* Info.plist */,
+				92CF5E151CCFA4EA007C7C2F /* MVMailBundle.h */,
+				9273CB941CCF6F0200E55850 /* MBIController.h */,
+				9273CB951CCF6F0200E55850 /* MBIController.m */,
+			);
+			path = MBI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9273CB8A1CCF6EA600E55850 /* MBI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9273CB911CCF6EA600E55850 /* Build configuration list for PBXNativeTarget "MBI" */;
+			buildPhases = (
+				9273CB871CCF6EA600E55850 /* Sources */,
+				9273CB881CCF6EA600E55850 /* Frameworks */,
+				9273CB891CCF6EA600E55850 /* Resources */,
+				9273CBAA1CCF868400E55850 /* Install Bundle */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MBI;
+			productName = MBI;
+			productReference = 9273CB8B1CCF6EA600E55850 /* MBI.mailbundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9273CB831CCF6EA600E55850 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Денис Либит";
+				TargetAttributes = {
+					9273CB8A1CCF6EA600E55850 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 9273CB861CCF6EA600E55850 /* Build configuration list for PBXProject "MBI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9273CB821CCF6EA600E55850;
+			productRefGroup = 9273CB8C1CCF6EA600E55850 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9273CB8A1CCF6EA600E55850 /* MBI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9273CB891CCF6EA600E55850 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9273CB871CCF6EA600E55850 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9273CB961CCF6F0200E55850 /* MBIController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9273CB8F1CCF6EA600E55850 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9273CB901CCF6EA600E55850 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9273CB921CCF6EA600E55850 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				INFOPLIST_FILE = MBI/Info.plist;
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Mail/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.parmalogica.MBI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mailbundle;
+			};
+			name = Debug;
+		};
+		9273CB931CCF6EA600E55850 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				INFOPLIST_FILE = MBI/Info.plist;
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Mail/Bundles";
+				PRODUCT_BUNDLE_IDENTIFIER = ru.parmalogica.MBI;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = mailbundle;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9273CB861CCF6EA600E55850 /* Build configuration list for PBXProject "MBI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9273CB8F1CCF6EA600E55850 /* Debug */,
+				9273CB901CCF6EA600E55850 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9273CB911CCF6EA600E55850 /* Build configuration list for PBXNativeTarget "MBI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9273CB921CCF6EA600E55850 /* Debug */,
+				9273CB931CCF6EA600E55850 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9273CB831CCF6EA600E55850 /* Project object */;
+}
