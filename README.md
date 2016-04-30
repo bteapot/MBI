@@ -1,6 +1,6 @@
 # MBI
 
-Menu bar unread count for Mail.app in Mac OS.
+Menu bar unread count indication for Mail.app in Mac OS.
 
 ### Usage
 
