@@ -21,12 +21,13 @@
 
 @interface MBIController ()
 
-@property (nonatomic, assign) NSInteger count;
+@property (nonatomic, assign) NSUInteger count;
 @property (nonatomic, strong) NSStatusItem *statusItem;
 @property (nonatomic, strong) NSDictionary *textAttributes;
 @property (nonatomic, assign) CGFloat zeroWidth;
 @property (nonatomic, strong) NSColor *badgeColorHasMail;
 @property (nonatomic, strong) NSColor *badgeColorNoMail;
+@property (nonatomic, assign) BOOL badged;
 
 @end
 
@@ -74,8 +75,6 @@
 	self = [super init];
 	
 	if (self) {
-		self.count = -1;
-		
 		self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
 		self.statusItem.title = nil;
 		self.statusItem.image = nil;
@@ -94,7 +93,11 @@
 		self.badgeColorHasMail = [NSColor blackColor];
 		self.badgeColorNoMail = [[NSColor blackColor] colorWithAlphaComponent:0.3];
 		
-		[self mailboxDisplayCountDidChange];
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+			if (!self.badged) {
+				[self updateBadgeWithCount:0];
+			}
+		});
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mailboxDisplayCountDidChange) name:@"MailboxDisplayCountDidChange" object:nil];
 	}
@@ -137,6 +140,9 @@
 // -----------------------------------------------------------------------------
 - (void)updateBadgeWithCount:(NSUInteger)count
 {
+	// indicate that badge count is set
+	self.badged = YES;
+	
 	// save current count for future comparisons
 	self.count = count;
 	
