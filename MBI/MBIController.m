@@ -21,7 +21,7 @@
 
 @interface MBIController ()
 
-@property (nonatomic, assign) NSUInteger count;
+@property (nonatomic, assign) NSInteger count;
 @property (nonatomic, strong) NSStatusItem *statusItem;
 @property (nonatomic, strong) NSDictionary *textAttributes;
 @property (nonatomic, assign) CGFloat zeroWidth;
@@ -74,6 +74,8 @@
 	self = [super init];
 	
 	if (self) {
+		self.count = -1;
+		
 		self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
 		self.statusItem.title = nil;
 		self.statusItem.image = nil;
