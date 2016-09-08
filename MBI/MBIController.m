@@ -238,6 +238,11 @@
 		
 		[CATransaction begin];
 		[CATransaction setAnimationDuration:duration];
+		[CATransaction setCompletionBlock:^{
+			[layer removeAllAnimations];
+			layer.transform = CATransform3DIdentity;
+			
+		}];
 		
 		self.statusItem.button.image = nsImage;
 		
@@ -245,8 +250,8 @@
 		animation.duration = duration;
 		animation.fromValue = @(M_PI_2);
 		animation.toValue = @0;
-		animation.removedOnCompletion = NO;
 		[layer addAnimation:animation forKey:@"expand"];
+		layer.transform = CATransform3DMakeRotation(0, 1, 0, 0);
 		
 		[CATransaction commit];
 	}];
@@ -255,8 +260,8 @@
 	animation.duration = duration;
 	animation.fromValue = @0;
 	animation.toValue = @(M_PI_2);
-	animation.removedOnCompletion = NO;
 	[layer addAnimation:animation forKey:@"collapse"];
+	layer.transform = CATransform3DMakeRotation(M_PI_2, 1, 0, 0);
 	
 	[CATransaction commit];
 }
