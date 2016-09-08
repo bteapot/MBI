@@ -19,6 +19,6 @@ For compatibility with future versions of Mail.app, use:
 This will extract UUID.
 
 - For Mac OS < 10.12: Add it to project's `Info.plist` into `SupportedPluginCompatibilityUUIDs`.
-- For macOS >= 10.12: Add it to project's `Info.plist` into `Supported%ld.%ldPluginCompatibilityUUIDs`, where “%ld.%ld” is the operating system version like “10.12”.
+- For macOS >= 10.12: Add it to project's `Info.plist` into `Supported%ld.%ldPluginCompatibilityUUIDs`, where `%ld.%ld` is the operating system version like `10.12`.
 
 Build project and restart Mail.app.
