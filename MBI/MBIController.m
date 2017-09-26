@@ -81,7 +81,7 @@
 		self.statusItem.highlightMode = YES;
 		self.statusItem.button.target = self;
 		self.statusItem.button.action = @selector(statusItemPressed);
-		self.statusItem.button.wantsLayer = YES;
+		//self.statusItem.button.wantsLayer = YES;
 		
 		self.textAttributes = @{
 			NSFontAttributeName: [NSFont boldSystemFontOfSize:12],
