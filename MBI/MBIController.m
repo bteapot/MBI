@@ -76,12 +76,15 @@
 	
 	if (self) {
 		self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-		self.statusItem.title = nil;
-		self.statusItem.image = nil;
 		self.statusItem.highlightMode = YES;
-		self.statusItem.button.target = self;
-		self.statusItem.button.action = @selector(statusItemPressed);
-		//self.statusItem.button.wantsLayer = YES;
+		
+		NSStatusBarButton *button = self.statusItem.button;
+		button.target = self;
+		button.action = @selector(statusItemPressed);
+		button.wantsLayer = YES;
+		
+		// hack for macOS 10.13
+		button.opaqueAncestor.layer = [CALayer layer];
 		
 		self.textAttributes = @{
 			NSFontAttributeName: [NSFont boldSystemFontOfSize:12],
@@ -241,10 +244,14 @@
 		[CATransaction setCompletionBlock:^{
 			[layer removeAllAnimations];
 			layer.transform = CATransform3DIdentity;
-			
 		}];
 		
 		self.statusItem.button.image = nsImage;
+		
+		CGRect frame = layer.frame;
+		CGPoint center = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
+		layer.position = center;
+		layer.anchorPoint = CGPointMake(0.5, 0.5);
 		
 		CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.x"];
 		animation.duration = duration;
