@@ -12,6 +12,39 @@
 #import "MVMailBundle.h"
 
 
+@interface NSView (AnchorPoint)
+
+- (void)setAnchorPoint:(CGPoint)point;
+
+@end
+
+@implementation NSView (AnchorPoint)
+
+- (void)setAnchorPoint:(CGPoint)point
+{
+	CALayer *layer = self.layer;
+	
+	CGPoint newPoint = CGPointMake(self.bounds.size.width * point.x, self.bounds.size.height * point.y);
+	CGPoint oldPoint = CGPointMake(self.bounds.size.width * layer.anchorPoint.x, self.bounds.size.height * layer.anchorPoint.y);
+	
+	newPoint = CGPointApplyAffineTransform(newPoint, layer.affineTransform);
+	oldPoint = CGPointApplyAffineTransform(oldPoint, layer.affineTransform);
+	
+	CGPoint position = layer.position;
+	
+	position.x -= oldPoint.x;
+	position.x += newPoint.x;
+	
+	position.y -= oldPoint.y;
+	position.y += newPoint.y;
+	
+	layer.position = position;
+	layer.anchorPoint = point;
+}
+
+@end
+
+
 @interface MBIController (MBI)
 
 + (void)registerBundle;
@@ -232,6 +265,8 @@
 	
 	
 	// animate count change
+	[self.statusItem.button setAnchorPoint:CGPointMake(0.5, 0.5)];
+	
 	CALayer *layer = self.statusItem.button.layer;
 	NSTimeInterval duration = 0.125;
 	
@@ -247,11 +282,7 @@
 		}];
 		
 		self.statusItem.button.image = nsImage;
-		
-		CGRect frame = layer.frame;
-		CGPoint center = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
-		layer.position = center;
-		layer.anchorPoint = CGPointMake(0.5, 0.5);
+		[self.statusItem.button setAnchorPoint:CGPointMake(0.5, 0.5)];
 		
 		CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.x"];
 		animation.duration = duration;
