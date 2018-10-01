@@ -15,7 +15,7 @@
 		9273CBAA1CCF868400E55850 /* Install Bundle */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "~/Library/Mail/Bundles";
+			dstPath = "${HOME}/Desktop";
 			dstSubfolderSpec = 0;
 			files = (
 				9273CBAB1CCF869800E55850 /* MBI.mailbundle in Install Bundle */,

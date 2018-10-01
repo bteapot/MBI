@@ -8,7 +8,9 @@ Enable Mail.app bundles:
 
 	defaults write com.apple.mail EnableBundles -bool YES
 
-Build project. This will place `MBI.mailbundle` into `~/Library/Mail/Bundles`. Restart Mail.app.
+Build the project. This will place `MBI.mailbundle` into `~/Desktop`. Copy it into  `~/Library/Mail/Bundles` and restart Mail.app.
+
+On macOS Mojave open Mail.app, navigate to `Preferences / General / Manage Plug-ins…` and enable `MBI.mailbundle`.
 
 ### Compatibility
 

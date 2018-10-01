@@ -35,6 +35,10 @@
 	<array>
 		<string>C86CD990-4660-4E36-8CDA-7454DEB2E199</string>
 	</array>
+	<key>Supported10.14PluginCompatibilityUUIDs</key>
+	<array>
+		<string>A4343FAF-AE18-40D0-8A16-DFAE481AF9C1</string>
+	</array>
 	<key>SupportedPluginCompatibilityUUIDs</key>
 	<array>
 		<string>71562B89-0D90-4588-8E94-A75B701D6443</string>
