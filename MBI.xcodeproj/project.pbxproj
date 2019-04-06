@@ -114,6 +114,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 9273CB821CCF6EA600E55850;
@@ -255,7 +256,7 @@
 				);
 				INFOPLIST_FILE = MBI/Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Mail/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = ru.parmalogica.MBI;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.bteapot.MBI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mailbundle;
@@ -272,7 +273,7 @@
 				);
 				INFOPLIST_FILE = MBI/Info.plist;
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Mail/Bundles";
-				PRODUCT_BUNDLE_IDENTIFIER = ru.parmalogica.MBI;
+				PRODUCT_BUNDLE_IDENTIFIER = ru.bteapot.MBI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = mailbundle;

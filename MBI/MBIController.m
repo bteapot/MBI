@@ -61,6 +61,7 @@
 @property (nonatomic, strong) NSColor *badgeColorHasMail;
 @property (nonatomic, strong) NSColor *badgeColorNoMail;
 @property (nonatomic, assign) BOOL badged;
+@property (nonatomic, assign) BOOL hideOnZero;
 
 @end
 
@@ -108,6 +109,8 @@
 	self = [super init];
 	
 	if (self) {
+		self.hideOnZero = [[NSUserDefaults standardUserDefaults] boolForKey:@"MBIHideOnZero"];
+		
 		self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
 		self.statusItem.highlightMode = YES;
 		
@@ -186,82 +189,88 @@
 	// drawing options
 	NSStringDrawingOptions options = NSStringDrawingUsesLineFragmentOrigin;
 	
-	// text size
-	NSString *text = [NSString stringWithFormat:@"%llu", (unsigned long long)count];
-	CGRect textRect = [text boundingRectWithSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX) options:options attributes:self.textAttributes context:nil];
-	CGFloat width = (floor(textRect.size.width / self.zeroWidth) + 2) * self.zeroWidth + 4;
+	// new image
+	NSImage *nsImage;
 	
-	if ((int)width % 2 != 0) {
-		width -= 1;
+	// show status item?
+	if (self.hideOnZero == NO || count > 0) {
+		// text size
+		NSString *text = [NSString stringWithFormat:@"%llu", (unsigned long long)count];
+		CGRect textRect = [text boundingRectWithSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX) options:options attributes:self.textAttributes context:nil];
+		CGFloat width = (floor(textRect.size.width / self.zeroWidth) + 2) * self.zeroWidth + 4;
+		
+		if ((int)width % 2 != 0) {
+			width -= 1;
+		}
+		
+		// badge and text rects
+		CGRect badgeRect = CGRectMake(0, 0, width, floor(textRect.size.height));
+		textRect = CGRectMake((badgeRect.size.width - textRect.size.width) / 2, (badgeRect.size.height - textRect.size.height) / 2, textRect.size.width, textRect.size.height);
+		
+		
+		// image mask
+		CGColorSpaceRef grayColorspace = CGColorSpaceCreateDeviceGray();
+		CGContextRef maskContext = CGBitmapContextCreate(NULL, badgeRect.size.width, badgeRect.size.height, 8, badgeRect.size.width * 4, grayColorspace, kCGImageAlphaNone);
+		CGColorSpaceRelease(grayColorspace);
+		
+		NSGraphicsContext *maskGraphicsContext = [NSGraphicsContext graphicsContextWithGraphicsPort:maskContext flipped:NO];
+		[NSGraphicsContext saveGraphicsState];
+		[NSGraphicsContext setCurrentContext:maskGraphicsContext];
+		
+		// white background
+		[[NSColor whiteColor] setFill];
+		NSRectFill(badgeRect);
+		
+		// draw text
+		[text drawWithRect:textRect options:options attributes:self.textAttributes];
+		
+		// pop context
+		[NSGraphicsContext restoreGraphicsState];
+		
+		// create an image mask
+		CGImageRef alphaMask = CGBitmapContextCreateImage(maskContext);
+		CGContextRelease(maskContext);
+		
+		
+		// image
+		CGColorSpaceRef rgbColorspace = CGColorSpaceCreateDeviceRGB();
+		CGContextRef imageContext = CGBitmapContextCreate(NULL, badgeRect.size.width, badgeRect.size.height, 8, badgeRect.size.width * 4, rgbColorspace, kCGImageAlphaPremultipliedLast);
+		CGColorSpaceRelease(rgbColorspace);
+		
+		NSGraphicsContext *imageGraphicsContext = [NSGraphicsContext graphicsContextWithGraphicsPort:imageContext flipped:NO];
+		[NSGraphicsContext saveGraphicsState];
+		[NSGraphicsContext setCurrentContext:imageGraphicsContext];
+		
+		// clip context with mask
+		CGContextSaveGState(imageContext);
+		CGContextClipToMask(imageContext, badgeRect, alphaMask);
+		CGImageRelease(alphaMask);
+		
+		// badge color
+		if (count == 0) {
+			[self.badgeColorNoMail setFill];
+		} else {
+			[self.badgeColorHasMail setFill];
+		}
+		
+		// draw the badge
+		CGFloat radius = badgeRect.size.height / 2;
+		NSBezierPath *badge = [NSBezierPath bezierPathWithRoundedRect:badgeRect xRadius:radius yRadius:radius];
+		[badge fill];
+		
+		// pop context
+		CGContextRestoreGState(imageContext);
+		[NSGraphicsContext restoreGraphicsState];
+		
+		// take image
+		CGImageRef cgImage = CGBitmapContextCreateImage(imageContext);
+		CGContextRelease(imageContext);
+		
+		// set image
+		nsImage = [[NSImage alloc] initWithCGImage:cgImage size:badgeRect.size];
+		CGImageRelease(cgImage);
+		nsImage.template = YES;
 	}
-	
-	// badge and text rects
-	CGRect badgeRect = CGRectMake(0, 0, width, floor(textRect.size.height));
-	textRect = CGRectMake((badgeRect.size.width - textRect.size.width) / 2, (badgeRect.size.height - textRect.size.height) / 2, textRect.size.width, textRect.size.height);
-	
-	
-	// image mask
-	CGColorSpaceRef grayColorspace = CGColorSpaceCreateDeviceGray();
-	CGContextRef maskContext = CGBitmapContextCreate(NULL, badgeRect.size.width, badgeRect.size.height, 8, badgeRect.size.width * 4, grayColorspace, kCGImageAlphaNone);
-	CGColorSpaceRelease(grayColorspace);
-	
-	NSGraphicsContext *maskGraphicsContext = [NSGraphicsContext graphicsContextWithGraphicsPort:maskContext flipped:NO];
-	[NSGraphicsContext saveGraphicsState];
-	[NSGraphicsContext setCurrentContext:maskGraphicsContext];
-	
-	// white background
-	[[NSColor whiteColor] setFill];
-	NSRectFill(badgeRect);
-	
-	// draw text
-	[text drawWithRect:textRect options:options attributes:self.textAttributes];
-	
-	// pop context
-	[NSGraphicsContext restoreGraphicsState];
-	
-	// create an image mask
-	CGImageRef alphaMask = CGBitmapContextCreateImage(maskContext);
-	CGContextRelease(maskContext);
-	
-	
-	// image
-	CGColorSpaceRef rgbColorspace = CGColorSpaceCreateDeviceRGB();
-	CGContextRef imageContext = CGBitmapContextCreate(NULL, badgeRect.size.width, badgeRect.size.height, 8, badgeRect.size.width * 4, rgbColorspace, kCGImageAlphaPremultipliedLast);
-	CGColorSpaceRelease(rgbColorspace);
-	
-	NSGraphicsContext *imageGraphicsContext = [NSGraphicsContext graphicsContextWithGraphicsPort:imageContext flipped:NO];
-	[NSGraphicsContext saveGraphicsState];
-	[NSGraphicsContext setCurrentContext:imageGraphicsContext];
-	
-	// clip context with mask
-	CGContextSaveGState(imageContext);
-	CGContextClipToMask(imageContext, badgeRect, alphaMask);
-	CGImageRelease(alphaMask);
-	
-	// badge color
-	if (count == 0) {
-		[self.badgeColorNoMail setFill];
-	} else {
-		[self.badgeColorHasMail setFill];
-	}
-	
-	// draw the badge
-	CGFloat radius = badgeRect.size.height / 2;
-	NSBezierPath *badge = [NSBezierPath bezierPathWithRoundedRect:badgeRect xRadius:radius yRadius:radius];
-	[badge fill];
-	
-	// pop context
-	CGContextRestoreGState(imageContext);
-	[NSGraphicsContext restoreGraphicsState];
-	
-	// take image
-	CGImageRef cgImage = CGBitmapContextCreateImage(imageContext);
-	CGContextRelease(imageContext);
-	
-	// set image
-	NSImage *nsImage = [[NSImage alloc] initWithCGImage:cgImage size:badgeRect.size];
-	CGImageRelease(cgImage);
-	nsImage.template = YES;
 	
 	
 	// animate count change
