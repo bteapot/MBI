@@ -12,6 +12,12 @@ Build the project. This will place `MBI.mailbundle` into `~/Desktop`. Copy it in
 
 On macOS Mojave open Mail.app, navigate to `Preferences / General / Manage Plug-ins…` and enable `MBI.mailbundle`.
 
+ "Manage plug-ins" button gone from Mail in Mojave >= 10.14.5
+
+ ```sh
+ sudo defaults write "/Library/Preferences/com.apple.mail" EnableBundles 1
+ ```
+
 ### Compatibility
 
 For compatibility with future versions of Mail.app, use:
