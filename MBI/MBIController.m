@@ -194,6 +194,9 @@
 	
 	// show status item?
 	if (self.hideOnZero == NO || count > 0) {
+        // screen scale
+        CGFloat scale = NSScreen.mainScreen.backingScaleFactor;
+        
 		// text size
 		NSString *text = [NSString stringWithFormat:@"%llu", (unsigned long long)count];
 		CGRect textRect = [text boundingRectWithSize:NSMakeSize(CGFLOAT_MAX, CGFLOAT_MAX) options:options attributes:self.textAttributes context:nil];
@@ -210,7 +213,8 @@
 		
 		// image mask
 		CGColorSpaceRef grayColorspace = CGColorSpaceCreateDeviceGray();
-		CGContextRef maskContext = CGBitmapContextCreate(NULL, badgeRect.size.width, badgeRect.size.height, 8, badgeRect.size.width * 4, grayColorspace, kCGImageAlphaNone);
+		CGContextRef maskContext = CGBitmapContextCreate(NULL, badgeRect.size.width * scale, badgeRect.size.height * scale, 8, badgeRect.size.width * scale * 4, grayColorspace, kCGImageAlphaNone);
+        CGContextScaleCTM(maskContext, scale, scale);
 		CGColorSpaceRelease(grayColorspace);
 		
 		NSGraphicsContext *maskGraphicsContext = [NSGraphicsContext graphicsContextWithGraphicsPort:maskContext flipped:NO];
@@ -234,7 +238,8 @@
 		
 		// image
 		CGColorSpaceRef rgbColorspace = CGColorSpaceCreateDeviceRGB();
-		CGContextRef imageContext = CGBitmapContextCreate(NULL, badgeRect.size.width, badgeRect.size.height, 8, badgeRect.size.width * 4, rgbColorspace, kCGImageAlphaPremultipliedLast);
+		CGContextRef imageContext = CGBitmapContextCreate(NULL, badgeRect.size.width * scale, badgeRect.size.height * scale, 8, badgeRect.size.width * scale * 4, rgbColorspace, kCGImageAlphaPremultipliedLast);
+        CGContextScaleCTM(imageContext, scale, scale);
 		CGColorSpaceRelease(rgbColorspace);
 		
 		NSGraphicsContext *imageGraphicsContext = [NSGraphicsContext graphicsContextWithGraphicsPort:imageContext flipped:NO];
@@ -267,7 +272,7 @@
 		CGContextRelease(imageContext);
 		
 		// set image
-		nsImage = [[NSImage alloc] initWithCGImage:cgImage size:badgeRect.size];
+        nsImage = [[NSImage alloc] initWithCGImage:cgImage size:CGSizeMake(badgeRect.size.width, badgeRect.size.height)];
 		CGImageRelease(cgImage);
 		nsImage.template = YES;
 	}
