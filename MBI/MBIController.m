@@ -272,7 +272,7 @@
 		CGContextRelease(imageContext);
 		
 		// set image
-        nsImage = [[NSImage alloc] initWithCGImage:cgImage size:CGSizeMake(badgeRect.size.width, badgeRect.size.height)];
+        nsImage = [[NSImage alloc] initWithCGImage:cgImage size:badgeRect.size];
 		CGImageRelease(cgImage);
 		nsImage.template = YES;
 	}

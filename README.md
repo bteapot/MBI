@@ -24,3 +24,14 @@ This will extract UUID.
 - For macOS >= 10.12: Add it to project's `Info.plist` into `Supported%ld.%ldPluginCompatibilityUUIDs`, where `%ld.%ld` is the operating system version like `10.12`.
 
 Build project and restart Mail.app.
+
+### Hide badge on zero unread messages
+
+Type in Terminal in macOS < Mojave:
+
+    defaults write com.apple.mail MBIHideOnZero -bool TRUE
+
+or in modern macOSes:
+
+    defaults write ~/Library/Containers/com.apple.mail/Data/Library/Preferences/com.apple.mail.plist MBIHideOnZero -bool TRUE
+
